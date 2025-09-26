@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->enum('document_type', ['CPF', 'CNPJ'])->default('CPF');
-            $table->integer('number');
+            $table->enum('document_type', [DocumentTypeEnum::CNPJ, DocumentTypeEnum::CPF])
+                ->default('CPF');
+            $table->integer('number')->unique();
             $table->timestamps();
         });
     }
