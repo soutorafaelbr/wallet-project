@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Transaction\Enum\UserTypeEnum;
 use App\Models\Document;
 use App\Models\Wallet;
 use Illuminate\Database\Migrations\Migration;
