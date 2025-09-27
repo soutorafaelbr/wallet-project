@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payer_id');
             $table->unsignedBigInteger('payee_id');
             $table->decimal('amount', 8, 2)->default(1);
-            $table->enum('type', ['debit', 'credit'])->default('debit');
+            $table->enum('type', [TransactionTypeEnum::CREDIT, TransactionTypeEnum::DEBIT]);
             $table->foreignIdFor(User::class, 'payer_id');
             $table->foreignIdFor(User::class, 'payee_id');
             $table->timestamps();
