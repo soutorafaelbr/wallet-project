@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('type', [UserTypeEnum::PF, UserTypeEnum::PJ])
-                ->default('PF');
+                ->default(UserTypeEnum::PF);
             $table->rememberToken();
             $table->timestamps();
         });
