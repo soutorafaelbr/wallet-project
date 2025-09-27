@@ -1,8 +1,8 @@
 <?php
 
-use App\Domain\Transaction\Enum\UserTypeEnum;
 use App\Models\Document;
 use App\Models\Wallet;
+use Domain\User\Enum\UserTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,15 +16,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('document_id');
-            $table->unsignedBigInteger('wallet_id');
+            $table->foreignIdFor(Document::class);
+            $table->foreignIdFor(Wallet::class);
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('type', [UserTypeEnum::PF, UserTypeEnum::PJ])
                 ->default('PF');
-            $table->foreignIdFor(Document::class);
-            $table->foreignIdFor(Wallet::class);
             $table->rememberToken();
             $table->timestamps();
         });

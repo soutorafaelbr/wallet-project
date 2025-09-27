@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Transaction\Enum;
+namespace Domain\Transaction\Enum;
 
 enum TransactionTypeEnum: string
 {
