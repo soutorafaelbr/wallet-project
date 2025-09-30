@@ -21,7 +21,6 @@ class UserFactory extends Factory
             'wallet_id' => Wallet::factory(),
             'document_id' => Document::factory(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

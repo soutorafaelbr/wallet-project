@@ -10,5 +10,11 @@ class Transaction extends Model
     /** @use HasFactory<\Database\Factories\TransactionFactory> */
     use HasFactory;
 
-    protected $fillable = ['type', 'amount', 'payer_id', 'payee_id'];
+    protected $fillable = ['amount', 'payer_id', 'payee_id'];
+
+    protected $casts = [
+        'amount' => 'float',
+        'payer_id' => 'int',
+        'payee_id' => 'int',
+    ];
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domain\Document\Enum\DocumentTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DocumentFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'document_type' => DocumentTypeEnum::CPF,
+            'number' => $this->faker->unique()->numerify('###########'),
         ];
+    }
+
+    public function cnpj(): Factory
+    {
+        return $this->state(fn (array $attributes) => [
+            'document_type' => DocumentTypeEnum::CNPJ,
+            'number' => $this->faker->unique()->numerify('##############'),
+        ]);
     }
 }

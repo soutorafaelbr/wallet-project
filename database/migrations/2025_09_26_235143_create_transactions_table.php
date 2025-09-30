@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'payer_id');
             $table->foreignIdFor(User::class, 'payee_id');
             $table->decimal('amount', 8, 2)->default(1);
-            $table->enum('type', [TransactionTypeEnum::CREDIT, TransactionTypeEnum::DEBIT]);
             $table->timestamps();
         });
     }
