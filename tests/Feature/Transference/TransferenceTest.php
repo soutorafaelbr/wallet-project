@@ -29,13 +29,6 @@ class TransferenceTest extends TestCase
         $this->transference = Transference::factory()->payerWithCredit(150)->make();
     }
 
-    protected function mockGatewaySuccessful(): void
-    {
-        Http::fake([
-            '*' => Http::response('{"status": "success","data": {"authorization": true}}', JsonResponse::HTTP_OK),
-        ]);
-    }
-
     public function test_transference_responds_with_http_created(): void
     {
         $this->mockGatewaySuccessful();
