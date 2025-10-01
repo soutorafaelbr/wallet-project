@@ -2,9 +2,53 @@
 
 namespace Tests\Unit;
 
+use App\Models\Transference;
+use App\Models\User;
+use Domain\Transaction\Action\MakeTransference;
+use Domain\Transaction\DTO\MakeTransferenceDTO;
+use Domain\Transaction\Exception\InsufficientFunds;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\TestCase;
 
 class MakeTransferenceTest extends TestCase
 {
+    private MakeTransference $makeTransferenceService;
+    private Transference $transference;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->makeTransferenceService = $this->app[MakeTransference::class];
+        $this->transference = Transference::factory()->payerWithCredit(150)->make();
+    }
+
+    public function test_throws_exception_when_payer_id_is_not_a_valid_user_id()
+    {
+        $payee = User::factory()->create();
+        $dto = new MakeTransferenceDto(123, $payee->id, 10.00);
+        $this->expectException(ModelNotFoundException::class);
+        $this->makeTransferenceService->execute($dto);
+    }
+
+    public function test_throws_exception_when_payee_id_is_not_a_valid_user_id()
+    {
+        $payer = User::factory()->create();
+        $dto = new MakeTransferenceDto($payer->id, 123, 10.00);
+        $this->expectException(ModelNotFoundException::class);
+        $this->makeTransferenceService->execute($dto);
+    }
+
+    public function test_throws_exception_when_funds_are_insufficient()
+    {
+        $dto = new MakeTransferenceDto($this->transference->payer_id, $this->transference->payee_id, 300.00);
+        $this->expectException(InsufficientFunds::class);
+        $this->makeTransferenceService->execute($dto);
+    }
+
+    public function test_responds_with_transference(): void
+    {
+        $this->mockGatewaySuccessful();
+        $dto = new MakeTransferenceDto($this->transference->payer_id, $this->transference->payee_id, 10.00);
+        $this->assertInstanceOf(Transference::class, $this->makeTransferenceService->execute($dto));
+    }
 }
