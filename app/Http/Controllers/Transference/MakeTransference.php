@@ -10,7 +10,10 @@ use Domain\Transaction\DTO\MakeTransferenceDTO;
 
 class MakeTransference extends Controller
 {
-    public function __invoke(MakeTransferenceRequest $request, MakeTransferenceService $makeTransference): TransferenceResource
+    public function __invoke(
+        MakeTransferenceRequest $request,
+        MakeTransferenceService $makeTransference
+    ): TransferenceResource
     {
         return new TransferenceResource(
             $makeTransference->execute(MakeTransferenceDTO::fromValidatedRequest($request->validated()))
