@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('transferences', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'payer_id');
             $table->foreignIdFor(User::class, 'payee_id');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('transferences');
     }
 };

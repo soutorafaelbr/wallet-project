@@ -3,20 +3,20 @@
 namespace Domain\Transaction\Action;
 
 use App\Http\Requests\Transference\MakeTransferenceRequest;
-use App\Models\Transaction;
+use App\Models\Transference;
 
 class MakeTransference
 {
-    public function execute(MakeTransferenceRequest $request): Transaction
+    public function execute(MakeTransferenceRequest $request): Transference
     {
-        $transaction = Transaction::query()->create($request->validated());
+        $transference = Transference::query()->create($request->validated());
 
-        if ($transaction->payer->wallet->balance < $transaction->amount) {
+        if ($transference->payer->wallet->balance < $transference->amount) {
             throw new \Exception('Insufficient funds');
         }
-        $transaction->payer->wallet->decrement('balance', $transaction->amount);
-        $transaction->payee->wallet->increment('balance', $transaction->amount);
+        $transference->payer->wallet->decrement('balance', $transference->amount);
+        $transference->payee->wallet->increment('balance', $transference->amount);
 
-        return $transaction;
+        return $transference;
     }
 }

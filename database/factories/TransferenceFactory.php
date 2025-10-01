@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaction;
+use App\Models\Transference;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transference>
  */
-class TransactionFactory extends Factory
+class TransferenceFactory extends Factory
 {
     public function definition(): array
     {
@@ -23,7 +23,7 @@ class TransactionFactory extends Factory
     public function payerWithCredit(float $balance = 100.00): Factory
     {
         return $this->afterMaking(
-            fn (Transaction $transaction) => $transaction->payer->wallet->update(['balance' => $balance])
+            fn (Transference $transference) => $transference->payer->wallet->update(['balance' => $balance])
         );
     }
 }
