@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Transaction\DTO;
+namespace Domain\Transference\DTO;
 
 class MakeTransferenceDTO
 {

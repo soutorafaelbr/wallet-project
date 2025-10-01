@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use App\Models\Transference;
 use App\Models\User;
-use Domain\Transaction\Action\MakeTransference;
-use Domain\Transaction\DTO\MakeTransferenceDTO;
-use Domain\Transaction\Exception\InsufficientFunds;
+use Domain\Transference\Action\MakeTransference;
+use Domain\Transference\DTO\MakeTransferenceDTO;
+use Domain\Transference\Exception\InsufficientFunds;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\TestCase;
 

@@ -1,12 +1,11 @@
 <?php
 
-namespace Domain\Transaction\Action;
+namespace Domain\Transference\Action;
 
 use App\Models\Transference;
-use App\Models\User;
-use Domain\Transaction\DTO\MakeTransferenceDTO;
-use Domain\Transaction\Exception\InsufficientFunds;
-use Domain\Transaction\Exception\TransferenceForbidden;
+use Domain\Transference\DTO\MakeTransferenceDTO;
+use Domain\Transference\Exception\InsufficientFunds;
+use Domain\Transference\Exception\TransferenceForbidden;
 use Domain\User\Repository\UserRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;

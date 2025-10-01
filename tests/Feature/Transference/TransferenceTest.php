@@ -3,7 +3,7 @@
 namespace Tests\Feature\Transference;
 
 use App\Models\Transference;
-use Domain\Transaction\Exception\TransferenceForbidden;
+use Domain\Transference\Exception\TransferenceForbidden;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
