@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Document;
+use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,6 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'wallet_id' => Wallet::factory(),
             'document_id' => Document::factory(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
@@ -26,10 +26,8 @@ class UserFactory extends Factory
         ];
     }
 
-    public function unverified(): static
+    public function configure(): Factory|UserFactory
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->afterCreating(fn (User $user) => Wallet::factory()->for($user)->create());
     }
 }

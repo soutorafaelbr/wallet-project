@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,5 +18,12 @@ class TransactionFactory extends Factory
             'payee_id' => fn () => User::factory(),
             'amount' => 100.00,
         ];
+    }
+
+    public function payerWithCredit(float $balance = 100.00): Factory
+    {
+        return $this->afterMaking(
+            fn (Transaction $transaction) => $transaction->payer->wallet->update(['balance' => $balance])
+        );
     }
 }

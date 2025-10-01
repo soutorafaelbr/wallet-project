@@ -16,7 +16,7 @@ class MakeTransferenceRequest extends FormRequest
         return [
             'payee_id' => 'required|exists:users,id',
             'payer_id' => 'required|exists:users,id',
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|gt:0',
         ];
     }
 }
