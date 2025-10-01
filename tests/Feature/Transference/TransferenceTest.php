@@ -3,6 +3,7 @@
 namespace Tests\Feature\Transference;
 
 use App\Models\Transference;
+use Domain\Transaction\Exception\TransferenceForbidden;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
@@ -180,7 +181,7 @@ class TransferenceTest extends TestCase
     {
         $this->gatewayRequestFailed();
 
-        $this->expectException(\Exception::class);
+        $this->expectException(TransferenceForbidden::class);
 
         $this->withoutExceptionHandling()
             ->postJson(
