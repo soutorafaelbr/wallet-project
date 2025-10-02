@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Wallet\Action;
+namespace Domain\Wallet\Service;
 
 use App\Models\Transference;
 use Domain\Wallet\DTO\CheckAvailableFundsDTO;
