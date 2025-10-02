@@ -3,7 +3,7 @@
 namespace Tests\Repository;
 
 use App\Models\Transference;
-use Domain\Transference\Repository\TransferenceRepository;
+use Domain\Wallet\Repository\TransferenceRepository;
 use Tests\TestCase;
 
 class TransferenceRepositoryTest extends TestCase

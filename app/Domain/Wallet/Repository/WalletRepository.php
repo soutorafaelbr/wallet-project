@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\Transference\Repository;
+namespace Domain\Wallet\Repository;
 
 use App\Models\Wallet;
-use Domain\Transference\DTO\CheckAvailableFundsDTO;
-use Domain\Transference\DTO\OperatesWalletTransferenceDTO;
+use Domain\Wallet\DTO\CheckAvailableFundsDTO;
+use Domain\Wallet\DTO\OperatesWalletTransferenceDTO;
 
 class WalletRepository
 {

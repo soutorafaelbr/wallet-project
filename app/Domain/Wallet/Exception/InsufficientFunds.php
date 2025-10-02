@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Transference\Exception;
+namespace Domain\Wallet\Exception;
 
 use Illuminate\Http\JsonResponse;
 

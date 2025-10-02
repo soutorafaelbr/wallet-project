@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Transference;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transference\MakeTransferenceRequest;
 use App\Http\Resources\TransferenceResource;
-use Domain\Transference\Action\MakeTransference as MakeTransferenceService;
-use Domain\Transference\DTO\MakeTransferenceDTO;
+use Domain\Wallet\Action\MakeTransference as MakeTransferenceService;
+use Domain\Wallet\DTO\MakeTransferenceDTO;
 
 class MakeTransference extends Controller
 {

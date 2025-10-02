@@ -1,11 +1,11 @@
 <?php
 
-namespace Domain\Transference\Action;
+namespace Domain\Wallet\Action;
 
 use App\Models\Transference;
-use Domain\Transference\DTO\MakeTransferenceDTO;
-use Domain\Transference\Exception\TransferenceForbidden;
-use Domain\Transference\Repository\TransferenceRepository;
+use Domain\Wallet\DTO\MakeTransferenceDTO;
+use Domain\Wallet\Exception\TransferenceForbidden;
+use Domain\Wallet\Repository\TransferenceRepository;
 use Domain\User\Repository\UserRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;

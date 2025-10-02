@@ -1,12 +1,12 @@
 <?php
 
-namespace Domain\Transference\Action;
+namespace Domain\Wallet\Action;
 
 use App\Models\Transference;
-use Domain\Transference\DTO\CheckAvailableFundsDTO;
-use Domain\Transference\DTO\OperatesWalletTransferenceDTO;
-use Domain\Transference\Exception\InsufficientFunds;
-use Domain\Transference\Repository\WalletRepository;
+use Domain\Wallet\DTO\CheckAvailableFundsDTO;
+use Domain\Wallet\DTO\OperatesWalletTransferenceDTO;
+use Domain\Wallet\Exception\InsufficientFunds;
+use Domain\Wallet\Repository\WalletRepository;
 
 class OperatesWalletTransference
 {

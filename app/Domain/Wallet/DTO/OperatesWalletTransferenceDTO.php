@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Transference\DTO;
+namespace Domain\Wallet\DTO;
 
 class OperatesWalletTransferenceDTO
 {

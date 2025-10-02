@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Transference\Repository;
+namespace Domain\Wallet\Repository;
 
 use App\Models\Transference;
 
