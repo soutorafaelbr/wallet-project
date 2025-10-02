@@ -6,7 +6,9 @@ use App\Models\Transference;
 use Domain\Wallet\DTO\CheckAvailableFundsDTO;
 use Domain\Wallet\DTO\OperatesWalletTransferenceDTO;
 use Domain\Wallet\Exception\InsufficientFunds;
+use Domain\Wallet\Exception\OperationFailed;
 use Domain\Wallet\Repository\WalletRepository;
+use Illuminate\Support\Facades\DB;
 
 class OperatesWalletTransference
 {
@@ -16,6 +18,7 @@ class OperatesWalletTransference
 
     public function execute(Transference $transference): void
     {
+        DB::beginTransaction();
         $hasEnoughFunds = $this->walletRepository->hasEnoughFunds(
             new CheckAvailableFundsDTO($transference->payer_id, $transference->amount)
         );
@@ -33,7 +36,9 @@ class OperatesWalletTransference
         );
 
         if (!$balanceDecreased || !$balanceIncreased) {
-            throw new \Exception('Failed to perform operation');
+            DB::rollBack();
+            throw new OperationFailed();
         }
+        DB::commit();
     }
 }
