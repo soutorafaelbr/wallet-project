@@ -36,7 +36,7 @@ class MakeTransference
 
             $this->operatesWalletTransference->execute($transference);
 
-            $response = Http::get('https://util.devi.tools/api/v2/authorize');
+            $response = $this->devToolsClient->authorizeTransference();
 
             if ($response->failed()) {
                 throw new TransferenceForbidden();
