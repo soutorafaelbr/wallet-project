@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'dev-tools' => [
+        'url' => env('DEV_TOOLS_URL', 'https://util.devi.tools/api/'),
+    ],
+
 ];

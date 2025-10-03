@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Http;
 
 class MakeTransference
 {
-
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly TransferenceRepository $transferenceRepository,
-        private readonly OperatesWalletTransference $operatesWalletTransference
+        private readonly OperatesWalletTransference $operatesWalletTransference,
+        private readonly DevToolsClient $devToolsClient
     )
     {
     }
