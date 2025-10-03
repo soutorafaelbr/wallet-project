@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Http;
 class MakeTransference
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly TransferenceRepository $transferenceRepository,
+        private readonly StoreTransference $storeTransference,
         private readonly OperatesWalletTransference $operatesWalletTransference,
-        private readonly DevToolsClient $devToolsClient
+        private readonly AuthorizeTransference $authorizeTransference
     )
     {
     }
@@ -24,23 +23,11 @@ class MakeTransference
     public function execute(MakeTransferenceDTO $dto): Transference
     {
         return DB::transaction(function () use ($dto) {
-            $payer = $this->userRepository->findOrFail($dto->payerId);
-
-            $payee = $this->userRepository->findOrFail($dto->payeeId);
-
-            $transference = $this->transferenceRepository->create([
-                'amount' => $dto->amount,
-                'payer_id' => $payer->id,
-                'payee_id' => $payee->id,
-            ]);
+            $transference = $this->storeTransference->execute($dto);
 
             $this->operatesWalletTransference->execute($transference);
 
-            $response = $this->devToolsClient->authorizeTransference();
-
-            if ($response->failed()) {
-                throw new TransferenceForbidden();
-            }
+            $this->authorizeTransference->execute();
 
             return $transference;
         });
