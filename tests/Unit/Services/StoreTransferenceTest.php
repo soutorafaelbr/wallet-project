@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Transference;
+namespace Tests\Unit;
 
 use App\Models\Transference;
 use Domain\Wallet\DTO\MakeTransferenceDTO;

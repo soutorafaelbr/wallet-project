@@ -4,11 +4,7 @@ namespace Domain\Wallet\Service;
 
 use App\Models\Transference;
 use Domain\Wallet\DTO\MakeTransferenceDTO;
-use Domain\Wallet\Exception\TransferenceForbidden;
-use Domain\Wallet\Repository\TransferenceRepository;
-use Domain\User\Repository\UserRepository;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 
 class MakeTransference
 {
