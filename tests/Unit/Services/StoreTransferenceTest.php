@@ -3,7 +3,9 @@
 namespace Tests\Unit;
 
 use App\Models\Transference;
+use Domain\Document\Enum\DocumentTypeEnum;
 use Domain\Wallet\DTO\MakeTransferenceDTO;
+use Domain\Wallet\Exception\CompanyCannotTransferFunds;
 use Domain\Wallet\Service\StoreTransference;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\TestCase;
@@ -52,6 +54,24 @@ class StoreTransferenceTest extends TestCase
         $this->service->execute(
             new MakeTransferenceDTO(
                 123,
+                $this->transference->payee_id,
+                $this->transference->amount
+            )
+        );
+    }
+
+
+    public function test_throws_exception_when_payer_is_not_a_personal_account()
+    {
+        $this->mockGatewaySuccessful();
+
+        $this->expectException(CompanyCannotTransferFunds::class);
+
+        $this->transference->payer->document->update(['document_type' => DocumentTypeEnum::CNPJ]);
+
+        $this->service->execute(
+            new MakeTransferenceDTO(
+                $this->transference->payer_id,
                 $this->transference->payee_id,
                 $this->transference->amount
             )

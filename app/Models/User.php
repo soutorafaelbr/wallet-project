@@ -43,6 +43,6 @@ class User extends Authenticatable
 
     public function isPersonalAccount(): bool
     {
-        return $this->document->document_type === DocumentTypeEnum::CPF;
+        return $this->document->document_type === DocumentTypeEnum::CPF->value;
     }
 }
