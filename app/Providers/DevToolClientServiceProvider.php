@@ -10,7 +10,7 @@ class DevToolClientServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(
+        $this->app->bind(
             DevToolsClient::class,
             fn () => new DevToolsClient(
                 Http::baseUrl(config('services.dev-tools.url'))

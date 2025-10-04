@@ -2,6 +2,7 @@
 
 namespace Domain\Wallet\Service;
 
+use App\Jobs\NotifyTransferenceSucceeded;
 use App\Models\Transference;
 use Domain\Wallet\DTO\MakeTransferenceDTO;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,8 @@ class MakeTransference
             $this->operatesWalletTransference->execute($transference);
 
             $this->authorizeTransference->execute();
+
+            NotifyTransferenceSucceeded::dispatch($transference);
 
             return $transference;
         });

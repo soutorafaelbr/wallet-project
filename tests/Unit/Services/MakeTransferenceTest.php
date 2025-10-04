@@ -2,12 +2,14 @@
 
 namespace Tests\Unit;
 
+use App\Jobs\NotifyTransferenceSucceeded;
 use App\Models\Transference;
 use App\Models\User;
 use Domain\Wallet\Service\MakeTransference;
 use Domain\Wallet\DTO\MakeTransferenceDTO;
 use Domain\Wallet\Exception\InsufficientFunds;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class MakeTransferenceTest extends TestCase
@@ -50,5 +52,14 @@ class MakeTransferenceTest extends TestCase
         $this->mockGatewaySuccessful();
         $dto = new MakeTransferenceDto($this->transference->payer_id, $this->transference->payee_id, 10.00);
         $this->assertInstanceOf(Transference::class, $this->makeTransferenceService->execute($dto));
+    }
+
+    public function test_notifies_users(): void
+    {
+        Queue::fake();
+        $this->mockGatewaySuccessful();
+        $dto = new MakeTransferenceDto($this->transference->payer_id, $this->transference->payee_id, 10.00);
+        $this->makeTransferenceService->execute($dto);
+        Queue::assertPushed(NotifyTransferenceSucceeded::class);
     }
 }
