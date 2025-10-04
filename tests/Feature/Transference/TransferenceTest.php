@@ -3,6 +3,8 @@
 namespace Tests\Feature\Transference;
 
 use App\Models\Transference;
+use Domain\Document\Enum\DocumentTypeEnum;
+use Domain\Wallet\Exception\CompanyCannotTransferFunds;
 use Domain\Wallet\Exception\TransferenceForbidden;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
@@ -167,5 +169,17 @@ class TransferenceTest extends TestCase
             ->postJson(
                 route('transference', $this->transference->only(['payer_id', 'payee_id', 'amount']))
             );
+    }
+
+    public function test_throws_exception_when_payer_is_not_a_personal_account()
+    {
+        $this->mockGatewaySuccessful();
+
+        $this->expectException(CompanyCannotTransferFunds::class);
+
+        $this->transference->payer->document->update(['document_type' => DocumentTypeEnum::CNPJ]);
+
+        $this->withoutExceptionHandling()
+            ->postJson(route('transference', $this->transference->only(['payer_id', 'payee_id', 'amount'])));
     }
 }

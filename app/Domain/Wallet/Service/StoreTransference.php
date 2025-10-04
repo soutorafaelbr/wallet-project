@@ -5,6 +5,7 @@ namespace Domain\Wallet\Service;
 use App\Models\Transference;
 use Domain\User\Repository\UserRepository;
 use Domain\Wallet\DTO\MakeTransferenceDTO;
+use Domain\Wallet\Exception\CompanyCannotTransferFunds;
 use Domain\Wallet\Repository\TransferenceRepository;
 
 class StoreTransference
@@ -20,6 +21,10 @@ class StoreTransference
     public function execute(MakeTransferenceDTO $dto): Transference
     {
         $payer = $this->userRepository->findOrFail($dto->payerId);
+
+        if ($payer->cannot('create', Transference::class)) {
+            throw new CompanyCannotTransferFunds();
+        }
 
         $payee = $this->userRepository->findOrFail($dto->payeeId);
 
