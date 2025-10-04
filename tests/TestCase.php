@@ -17,4 +17,14 @@ abstract class TestCase extends BaseTestCase
             '*' => Http::response('{"status": "success","data": {"authorization": true}}', JsonResponse::HTTP_OK),
         ]);
     }
+
+    protected function mockGatewayFailed(): void
+    {
+        Http::fake([
+            '*' => Http::response(
+                '{"status": "fail","data": {"authorization": false}}',
+                JsonResponse::HTTP_FORBIDDEN
+            ),
+        ]);
+    }
 }

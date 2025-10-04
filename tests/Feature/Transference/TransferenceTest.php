@@ -10,19 +10,6 @@ use Tests\TestCase;
 
 class TransferenceTest extends TestCase
 {
-    /**
-     * @return void
-     */
-    public function gatewayRequestFailed(): void
-    {
-        Http::fake([
-            '*' => Http::response(
-                '{"status": "fail","data": {"authorization": false}}',
-                JsonResponse::HTTP_FORBIDDEN
-            ),
-        ]);
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -151,7 +138,7 @@ class TransferenceTest extends TestCase
 
     public function test_when_unauthorized_by_gateway_rollback_all_operations(): void
     {
-        $this->gatewayRequestFailed();
+        $this->mockGatewayFailed();
 
         $this->postJson(
             route('transference', $this->transference->only(['payer_id', 'payee_id', 'amount']))
@@ -172,7 +159,7 @@ class TransferenceTest extends TestCase
 
     public function test_when_unauthorized_by_gateway_rollback_all_operations_throws_exception(): void
     {
-        $this->gatewayRequestFailed();
+        $this->mockGatewayFailed();
 
         $this->expectException(TransferenceForbidden::class);
 
