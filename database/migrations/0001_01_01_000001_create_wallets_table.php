@@ -13,10 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wallets', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)
+                ->primary()
+                ->unique()
+                ->constrained()
+                ->cascadeOnDelete();
             $table->decimal('balance', 8, 2)->default(0);
-            $table->timestamps();
         });
     }
 

@@ -20,7 +20,7 @@ class WalletRepository
     public function decreaseBalance(OperatesWalletTransferenceDTO $dto): bool
     {
         return (bool) $this->wallet->query()
-            ->where('id', $dto->userId)
+            ->where('user_id', $dto->userId)
             ->decrement('balance', $dto->amount);
     }
 
