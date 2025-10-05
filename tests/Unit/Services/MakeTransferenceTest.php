@@ -52,7 +52,7 @@ class MakeTransferenceTest extends TestCase
     {
         $this->mockGatewaySuccessful();
         $dto = new MakeTransferenceDto($this->transference->payer_id, $this->transference->payee_id, 10.00);
-        $this->assertInstanceOf(Transference::class, $this->makeTransferenceService->execute($dto));
+        $this->assertInstanceOf(Transference::class,  $this->app[MakeTransference::class]->execute($dto));
     }
 
     public function test_notifies_users(): void
