@@ -25,6 +25,7 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
@@ -47,6 +48,8 @@ jobs:
 
       - name: Esperar MySQL ficar pronto
         run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-client
           echo "Aguardando MySQL..."
           for i in {1..15}; do
             if mysqladmin ping -h"mysql" --silent; then
@@ -54,18 +57,4 @@ jobs:
               break
             fi
             echo "Tentando novamente..."
-            sleep 2
-          done
-
-      - name: Configurar banco de dados de testes
-        run: |
-          php artisan migrate --force
-
-      - name: Rodar PHPUnit
-        run: vendor/bin/phpunit --testdox
-
-      - name: Rodar análise estática (PHPStan)
-        run: vendor/bin/phpstan analyse --memory-limit=1G
-
-      - name: Rodar Laravel Pint
-        run: vendor/bin/pint --test
+            slee
