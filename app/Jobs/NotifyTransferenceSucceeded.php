@@ -13,8 +13,6 @@ class NotifyTransferenceSucceeded implements ShouldQueue
 
     public $tries = 3;
 
-    public function __construct(private readonly Transference $transference) {}
-
     public function handle(DevToolsClient $devToolsClient): void
     {
         $response = $devToolsClient->notifyUsers();

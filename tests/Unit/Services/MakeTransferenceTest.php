@@ -14,14 +14,11 @@ use Tests\TestCase;
 
 class MakeTransferenceTest extends TestCase
 {
-    private MakeTransference $makeTransferenceService;
-
     private Transference $transference;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->makeTransferenceService = $this->app[MakeTransference::class];
         $this->transference = Transference::factory()->payerWithCredit(150)->make();
     }
 

@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property-read \App\Models\Document|null $document
+ * @property-read \App\Models\Wallet|null $wallet
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

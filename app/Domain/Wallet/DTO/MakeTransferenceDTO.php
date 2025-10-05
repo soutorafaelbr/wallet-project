@@ -4,13 +4,13 @@ namespace Domain\Wallet\DTO;
 
 class MakeTransferenceDTO
 {
-    public string $payerId;
+    public int $payerId;
 
-    public string $payeeId;
+    public int $payeeId;
 
     public float $amount;
 
-    public function __construct(string $payerId, string $payeeId, float $amount)
+    public function __construct(int $payerId, int $payeeId, float $amount)
     {
         $this->payerId = $payerId;
         $this->payeeId = $payeeId;

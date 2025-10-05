@@ -21,8 +21,7 @@ class NotifyTransferenceSucceededTest extends TestCase
     public function test_calls_endpoint_to_notify(): void
     {
         $this->mockNotifyEndpoint();
-        $transference = Transference::factory()->create();
-        NotifyTransferenceSucceeded::dispatchSync($transference);
+        NotifyTransferenceSucceeded::dispatchSync();
         Http::assertSentCount(1);
     }
 
@@ -30,11 +29,9 @@ class NotifyTransferenceSucceededTest extends TestCase
     {
         $this->mockNotifyEndpoint();
 
-        $mock = \Mockery::mock(NotifyTransferenceSucceeded::class)
-            ->makePartial();
+        $mock = \Mockery::mock(NotifyTransferenceSucceeded::class)->makePartial();
 
-        $mock->shouldReceive('release')
-            ->once();
+        $mock->shouldReceive('release')->once();
 
         $mock->handle(app(DevToolsClient::class));
     }

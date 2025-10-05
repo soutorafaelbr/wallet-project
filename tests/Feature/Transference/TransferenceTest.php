@@ -12,6 +12,8 @@ use Tests\TestCase;
 
 class TransferenceTest extends TestCase
 {
+    private Transference $transference;
+
     protected function setUp(): void
     {
         parent::setUp();

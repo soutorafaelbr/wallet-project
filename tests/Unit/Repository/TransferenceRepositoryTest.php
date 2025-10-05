@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class TransferenceRepositoryTest extends TestCase
 {
+    private TransferenceRepository $transferenceRepository;
+
     protected function setUp(): void
     {
         parent::setUp();

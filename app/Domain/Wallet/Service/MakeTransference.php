@@ -24,7 +24,7 @@ class MakeTransference
 
             $this->authorizeTransfer->execute();
 
-            NotifyTransferenceSucceeded::dispatch($transference);
+            NotifyTransferenceSucceeded::dispatch();
 
             return $transference;
         });

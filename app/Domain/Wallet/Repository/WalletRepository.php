@@ -12,14 +12,14 @@ class WalletRepository
 
     public function increaseBalance(OperatesWalletTransferenceDTO $dto): bool
     {
-        return $this->wallet->query()
+        return (bool) $this->wallet->query()
             ->where('user_id', $dto->userId)
             ->increment('balance', $dto->amount);
     }
 
     public function decreaseBalance(OperatesWalletTransferenceDTO $dto): bool
     {
-        return $this->wallet->query()
+        return (bool) $this->wallet->query()
             ->where('id', $dto->userId)
             ->decrement('balance', $dto->amount);
     }
