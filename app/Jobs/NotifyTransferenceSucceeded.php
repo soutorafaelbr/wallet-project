@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Models\Transference;
 use Domain\Wallet\Service\DevToolsClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;

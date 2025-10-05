@@ -13,6 +13,7 @@ use Tests\TestCase;
 class StoreTransferenceTest extends TestCase
 {
     private StoreTransference $service;
+
     private Transference $transference;
 
     protected function setUp(): void

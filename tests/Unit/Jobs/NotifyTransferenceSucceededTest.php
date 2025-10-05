@@ -3,7 +3,6 @@
 namespace Tests\Jobs;
 
 use App\Jobs\NotifyTransferenceSucceeded;
-use App\Models\Transference;
 use Domain\Wallet\Service\DevToolsClient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
