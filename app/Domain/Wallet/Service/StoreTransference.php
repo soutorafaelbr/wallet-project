@@ -10,10 +10,9 @@ use Domain\Wallet\Repository\TransferenceRepository;
 
 class StoreTransference
 {
-
     public function __construct(
         private readonly UserRepository $userRepository,
-        private readonly TransferenceRepository $transferenceRepository
+        private readonly TransferenceRepository $transferenceRepo
     )
     {
     }
@@ -28,7 +27,7 @@ class StoreTransference
 
         $payee = $this->userRepository->findOrFail($dto->payeeId);
 
-        return $this->transferenceRepository->create([
+        return $this->transferenceRepo->create([
             'amount' => $dto->amount,
             'payer_id' => $payer->id,
             'payee_id' => $payee->id,

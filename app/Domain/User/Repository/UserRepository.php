@@ -11,8 +11,8 @@ class UserRepository
     {
     }
 
-    public function findOrFail(int $id): User
+    public function findOrFail(int $userId): User
     {
-        return $this->user->query()->findOrFail($id);
+        return $this->user->query()->findOrFail($userId);
     }
 }

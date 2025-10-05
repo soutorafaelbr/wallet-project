@@ -11,8 +11,8 @@ class MakeTransference
 {
     public function __construct(
         private readonly StoreTransference $storeTransference,
-        private readonly OperatesWalletTransference $operatesWalletTransference,
-        private readonly AuthorizeTransference $authorizeTransference
+        private readonly OperatesWalletTransference $walletTransference,
+        private readonly AuthorizeTransference $authorizeTransfer
     )
     {
     }
@@ -22,9 +22,9 @@ class MakeTransference
         return DB::transaction(function () use ($dto) {
             $transference = $this->storeTransference->execute($dto);
 
-            $this->operatesWalletTransference->execute($transference);
+            $this->walletTransference->execute($transference);
 
-            $this->authorizeTransference->execute();
+            $this->authorizeTransfer->execute();
 
             NotifyTransferenceSucceeded::dispatch($transference);
 
