@@ -60,7 +60,6 @@ class StoreTransferenceTest extends TestCase
         );
     }
 
-
     public function test_throws_exception_when_payer_is_not_a_personal_account()
     {
         $this->mockGatewaySuccessful();

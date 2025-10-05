@@ -13,16 +13,14 @@ class StoreTransference
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly TransferenceRepository $transferenceRepo
-    )
-    {
-    }
+    ) {}
 
     public function execute(MakeTransferenceDTO $dto): Transference
     {
         $payer = $this->userRepository->findOrFail($dto->payerId);
 
         if ($payer->cannot('create', Transference::class)) {
-            throw new CompanyCannotTransferFunds();
+            throw new CompanyCannotTransferFunds;
         }
 
         $payee = $this->userRepository->findOrFail($dto->payeeId);

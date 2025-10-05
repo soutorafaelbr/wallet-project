@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Document;
-use App\Models\Wallet;
 use Domain\User\Enum\UserTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

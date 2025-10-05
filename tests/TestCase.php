@@ -2,14 +2,14 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 
 abstract class TestCase extends BaseTestCase
 {
-    use RefreshDatabase;
+    use LazilyRefreshDatabase;
 
     protected function mockGatewaySuccessful(): void
     {
@@ -25,6 +25,13 @@ abstract class TestCase extends BaseTestCase
                 '{"status": "fail","data": {"authorization": false}}',
                 JsonResponse::HTTP_FORBIDDEN
             ),
+        ]);
+    }
+
+    protected function mockNotificationSuccessful()
+    {
+        Http::fake([
+            '*' => Http::response('{}', JsonResponse::HTTP_OK),
         ]);
     }
 }

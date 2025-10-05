@@ -5,7 +5,9 @@ namespace Domain\Wallet\DTO;
 class MakeTransferenceDTO
 {
     public string $payerId;
+
     public string $payeeId;
+
     public float $amount;
 
     public function __construct(string $payerId, string $payeeId, float $amount)

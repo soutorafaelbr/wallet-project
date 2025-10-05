@@ -1,0 +1,58 @@
+name: CI - Testes e Análise Estática
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: testing
+          MYSQL_ROOT_PASSWORD: root
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar versão do PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo_mysql
+          coverage: none
+
+      - name: Instalar dependências do Composer
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Copiar .env para testes
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Gerar chave da aplicação
+        run: php artisan key:generate
+
+      - name: Configurar banco de dados de testes
+        run: |
+          php artisan migrate --force
+
+      - name: Rodar PHPUnit
+        run: vendor/bin/phpunit --testdox
+
+      - name: Rodar análise estática (PHPStan)
+        run: vendor/bin/phpstan analyse --memory-limit=1G
+
+      - name: Rodar Laravel Pint
+        run: vendor/bin/pint --test

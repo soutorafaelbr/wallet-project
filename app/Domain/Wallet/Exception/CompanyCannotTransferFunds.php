@@ -12,6 +12,7 @@ class CompanyCannotTransferFunds extends Exception
         $this->message = 'Company cannot transfer funds';
         parent::__construct();
     }
+
     public function render(): JsonResponse
     {
         return response()->json(

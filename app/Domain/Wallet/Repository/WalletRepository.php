@@ -8,9 +8,7 @@ use Domain\Wallet\DTO\OperatesWalletTransferenceDTO;
 
 class WalletRepository
 {
-    public function __construct(private readonly Wallet $wallet)
-    {
-    }
+    public function __construct(private readonly Wallet $wallet) {}
 
     public function increaseBalance(OperatesWalletTransferenceDTO $dto): bool
     {
@@ -25,6 +23,7 @@ class WalletRepository
             ->where('id', $dto->userId)
             ->decrement('balance', $dto->amount);
     }
+
     public function hasEnoughFunds(CheckAvailableFundsDTO $dto): bool
     {
         return $this->wallet->query()
@@ -32,5 +31,4 @@ class WalletRepository
             ->where('balance', '>=', $dto->fundsToTransfer)
             ->exists();
     }
-
 }

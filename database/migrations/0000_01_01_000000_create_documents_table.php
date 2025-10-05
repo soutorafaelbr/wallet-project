@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->enum('document_type', [DocumentTypeEnum::CNPJ, DocumentTypeEnum::CPF])
                 ->default('CPF');
-            $table->integer('number')->unique();
+            $table->bigInteger('number')->unique();
             $table->timestamps();
         });
     }

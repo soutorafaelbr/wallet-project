@@ -10,6 +10,7 @@ use Tests\TestCase;
 class WalletRepositoryTest extends TestCase
 {
     private WalletRepository $repository;
+
     private User $user;
 
     protected function setUp(): void

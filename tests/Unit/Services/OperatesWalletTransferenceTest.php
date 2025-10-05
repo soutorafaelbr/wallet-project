@@ -8,7 +8,6 @@ use Domain\Wallet\Exception\OperationFailed;
 use Domain\Wallet\Repository\WalletRepository;
 use Domain\Wallet\Service\OperatesWalletTransference;
 use Mockery;
-use Mockery\Mock;
 use Tests\TestCase;
 
 class OperatesWalletTransferenceTest extends TestCase

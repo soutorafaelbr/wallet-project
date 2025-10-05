@@ -40,7 +40,7 @@ class TransferenceTest extends TestCase
         );
     }
 
-    public function test_transference_responds_with_transference(): void
+    public function test_responds_with_transference(): void
     {
         $this->mockGatewaySuccessful();
         $this->withoutExceptionHandling()
@@ -135,7 +135,7 @@ class TransferenceTest extends TestCase
 
         $this->postJson(route('transference', $this->transference->only(['payer_id', 'payee_id', 'amount'])));
 
-        Http::assertSentCount(1);
+        Http::assertSentCount(2);
     }
 
     public function test_when_unauthorized_by_gateway_rollback_all_operations(): void

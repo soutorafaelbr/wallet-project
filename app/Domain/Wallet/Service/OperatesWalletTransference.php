@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class OperatesWalletTransference
 {
-    public function __construct(private readonly WalletRepository $walletRepository)
-    {
-    }
+    public function __construct(private readonly WalletRepository $walletRepository) {}
 
     public function execute(Transference $transference): void
     {
@@ -23,8 +21,8 @@ class OperatesWalletTransference
             new CheckAvailableFundsDTO($transference->payer_id, $transference->amount)
         );
 
-        if (!$hasEnoughFunds) {
-            throw new InsufficientFunds();
+        if (! $hasEnoughFunds) {
+            throw new InsufficientFunds;
         }
 
         $balanceDecreased = $this->walletRepository->decreaseBalance(
@@ -35,9 +33,9 @@ class OperatesWalletTransference
             new OperatesWalletTransferenceDTO($transference->amount, $transference->payee_id)
         );
 
-        if (!$balanceDecreased || !$balanceIncreased) {
+        if (! $balanceDecreased || ! $balanceIncreased) {
             DB::rollBack();
-            throw new OperationFailed();
+            throw new OperationFailed;
         }
         DB::commit();
     }

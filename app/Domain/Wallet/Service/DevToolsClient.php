@@ -7,10 +7,7 @@ use Illuminate\Http\Client\Response;
 
 class DevToolsClient
 {
-
-    public function __construct(private readonly PendingRequest $httpClient)
-    {
-    }
+    public function __construct(private readonly PendingRequest $httpClient) {}
 
     public function authorizeTransference(): Response
     {

@@ -13,9 +13,7 @@ class MakeTransference
         private readonly StoreTransference $storeTransference,
         private readonly OperatesWalletTransference $walletTransference,
         private readonly AuthorizeTransference $authorizeTransfer
-    )
-    {
-    }
+    ) {}
 
     public function execute(MakeTransferenceDTO $dto): Transference
     {

@@ -16,6 +16,7 @@ class AuthorizeTransferenceTest extends TestCase
         parent::setUp();
         $this->service = $this->app[DevToolsClient::class];
     }
+
     public function test_hits_endpoint(): void
     {
         $this->mockGatewaySuccessful();
