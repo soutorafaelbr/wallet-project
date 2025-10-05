@@ -20,10 +20,8 @@ class NotifyTransferenceSucceeded implements ShouldQueue
     public function handle(DevToolsClient $devToolsClient): void
     {
         $response = $devToolsClient->notifyUsers();
-
         if ($response->failed()) {
             $this->release(now()->addMinutes(2));
         }
-
     }
 }
