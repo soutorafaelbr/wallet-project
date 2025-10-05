@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace App\Domain\Wallet\Policies;
 
 use App\Models\User;
 
