@@ -57,4 +57,17 @@ jobs:
               break
             fi
             echo "Tentando novamente..."
-            slee
+            sleep 2
+          done
+
+      - name: Configurar banco de dados de testes
+        run: php artisan migrate --force
+
+      - name: Rodar PHPUnit
+        run: vendor/bin/phpunit --testdox
+
+      - name: Rodar análise estática (PHPStan)
+        run: vendor/bin/phpstan analyse --memory-limit=1G
+
+      - name: Rodar Laravel Pint
+        run: vendor/bin/pint --test
