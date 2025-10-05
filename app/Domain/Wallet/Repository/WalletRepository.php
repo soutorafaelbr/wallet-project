@@ -12,24 +12,24 @@ class WalletRepository
     {
     }
 
-    public function increaseBalance(OperatesWalletTransferenceDTO $DTO): bool
+    public function increaseBalance(OperatesWalletTransferenceDTO $dto): bool
     {
         return $this->wallet->query()
-            ->where('user_id', $DTO->userId)
-            ->increment('balance', $DTO->amount);
+            ->where('user_id', $dto->userId)
+            ->increment('balance', $dto->amount);
     }
 
-    public function decreaseBalance(OperatesWalletTransferenceDTO $DTO): bool
+    public function decreaseBalance(OperatesWalletTransferenceDTO $dto): bool
     {
         return $this->wallet->query()
-            ->where('id', $DTO->userId)
-            ->decrement('balance', $DTO->amount);
+            ->where('id', $dto->userId)
+            ->decrement('balance', $dto->amount);
     }
-    public function hasEnoughFunds(CheckAvailableFundsDTO $DTO): bool
+    public function hasEnoughFunds(CheckAvailableFundsDTO $dto): bool
     {
         return $this->wallet->query()
-            ->where('user_id', $DTO->payerId)
-            ->where('balance', '>=', $DTO->fundsToTransfer)
+            ->where('user_id', $dto->payerId)
+            ->where('balance', '>=', $dto->fundsToTransfer)
             ->exists();
     }
 
