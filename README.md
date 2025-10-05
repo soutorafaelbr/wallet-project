@@ -2,6 +2,9 @@
 
 O projeto foi desenvolvido usando PHP e MYSQL. O docker foi utilizado para facilitar a configuração do ambiente de desenvolvimento.
 
+## Diagrama do banco de dados:
+![db_schema.png](database/db_schema.png)
+
 ### Endpoint Transfer
 
 O endpoint transfer permite realizar uma transferência entre contas.
