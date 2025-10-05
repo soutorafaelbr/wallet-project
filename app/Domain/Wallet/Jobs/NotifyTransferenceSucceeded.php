@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Domain\Wallet\Jobs;
 
 use Domain\Wallet\Service\DevToolsClient;
 use Illuminate\Contracts\Queue\ShouldQueue;

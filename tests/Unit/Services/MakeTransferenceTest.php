@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Jobs\NotifyTransferenceSucceeded;
+use App\Domain\Wallet\Jobs\NotifyTransferenceSucceeded;
 use App\Models\Transference;
 use App\Models\User;
 use Domain\Wallet\DTO\MakeTransferenceDTO;

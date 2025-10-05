@@ -2,7 +2,7 @@
 
 namespace Domain\Wallet\Service;
 
-use App\Jobs\NotifyTransferenceSucceeded;
+use App\Domain\Wallet\Jobs\NotifyTransferenceSucceeded;
 use App\Models\Transference;
 use Domain\Wallet\DTO\MakeTransferenceDTO;
 use Illuminate\Support\Facades\DB;

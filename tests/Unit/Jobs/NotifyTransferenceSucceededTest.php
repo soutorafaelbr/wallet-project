@@ -2,7 +2,7 @@
 
 namespace Tests\Jobs;
 
-use App\Jobs\NotifyTransferenceSucceeded;
+use App\Domain\Wallet\Jobs\NotifyTransferenceSucceeded;
 use Domain\Wallet\Service\DevToolsClient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
