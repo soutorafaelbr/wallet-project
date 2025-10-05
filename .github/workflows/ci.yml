@@ -46,6 +46,18 @@ jobs:
       - name: Gerar chave da aplicação
         run: php artisan key:generate
 
+      - name: Esperar MySQL ficar pronto
+        run: |
+          echo "Aguardando MySQL..."
+          for i in {1..15}; do
+            if mysqladmin ping -h"mysql" --silent; then
+              echo "MySQL está pronto!"
+              break
+            fi
+            echo "Tentando novamente..."
+            sleep 2
+          done
+
       - name: Configurar banco de dados de testes
         run: |
           php artisan migrate --force
