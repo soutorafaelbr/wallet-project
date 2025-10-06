@@ -3,7 +3,10 @@
 O projeto foi desenvolvido usando PHP e MYSQL. O docker foi utilizado para facilitar a configuração do ambiente de desenvolvimento.
 
 ## Diagrama do banco de dados:
-![db_schema.png](database/db_schema.png)
+![db_schema.png](docs/db_schema.png)
+
+## DDD Estratégico:
+![arch-domain.png](arch-domain.png)
 
 ### Endpoint Transfer
 
